@@ -1,0 +1,51 @@
+                       
+					   Performance Improvements
+
+	Aiming to lower the response time to user, I decided to use cache to log
+information relevant to user input. In addition to caching the access_token for 
+the Spotify API, the server achieves an extra performance improvement by caching
+the results of an artist search and making it valid for 30 days. Caching this 
+information and using it works as described below. 
+	When a user searches for a new artist, the information received form Spotify 
+is saved as a .json file that contains field 'expire' date, set initially to 30 
+days and an array, 'art', containing album art file names for the artist search.
+These searches are saved under ./cache/ and each .json file is named as the
+search term entered by the user, changed to lower case.  
+	When a user searches for a term already searched in the last 30 days, the 
+program retrieves the cached album art file names for the artist in question. It
+then proceeds to serve an HTML file to the user with the cached image file names
+as sources for the image tags. Caching the search result in this manner lessens
+the need to interact and exchange information with the Spotify API when handling 
+frequently searched terms. Note that the cache expiration can be easily change 
+to a longer or shorter period upon analyzing the frequency in which artist
+tend to release new albums. This performance improvement, however, generates some
+drawbacks. For example, the web page may lack to serve all the available albums
+for a cached search case an artist has a new album release in the last 30 
+days. Then one may opt to set a shorter expiration date for the cache, such as 
+15 days. Nevertheless, the same problem still exists as serving a cached search
+for an artist that released an album in the last 15 days will not contain the 
+latest album art. Since shortening the cache expiration does not get rid of the 
+this drawback, one can keep this caching method but also implementing a new 
+function into the web server. This function would periodically check if there are
+new album art available for the cached search terms and add the art to 
+./album-art/ and update 'art' array and expiration case new art is available. 
+	Now, as I keep thinking about this and realize this paragraph is turning into
+a short essay, I am wondering: where should this caching stop? Why not just 
+download all album art available on Spotify and then just check for updates
+periodically? That would give the user the fastest response time but would also 
+dramatically increase storage needs and checking for updates for all possible 
+albums would also increase web traffic. Why not eliminate completely the need to cache
+images and keep the whole server to a few kilobytes of text? Well, the machine
+hosting the server surely, nowadays, has a few megabytes or even gigabytes to 
+spare, hence using that storage wisely can minimize the web traffic for frequently
+searched terms. For example, we can serve the Taylor Swift album art to millions
+of her fans using the cached art instead of downloading the same set of album art
+millions of times in order to serve them.
+	Caching the search results is a tool that can improve response time for the 
+users and provide them with all album art available for the artist searched when a 
+function periodically checks cached searches for updates. On the other
+hand, it gives the programmer lots to think about when aiming to use cache 
+as a tool to increase efficiency while minimizing unnecessary use of storage and 
+web traffic. 
+
+           Vagner Machado - QCID 23651127 - Spring 2020

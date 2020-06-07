@@ -1,0 +1,64 @@
+<!--
+=-=-=-=-=-=-=-=-=-=-=-=-
+Album Art Search
+=-=-=-=-=-=-=-=-=-=-=-=-
+Student ID: 23651127
+Comment (Required): This is the landing page with HTML and CSS elements
+served to clients that connect to localhost:3000 root.
+
+Other than addding a background to add some texture to the body and adding metadata for the viewport
+in order to better view and test the site on my cellphone, I did not make any major changes to provided code.
+
+When the homepage is loaded, the user has the choice to enter an artist name, or any term at all, and hit the search button
+to look for album art relevant to term typed in. Upon hitting search, the term in the input 
+box is sent to page "search" through GET as determined by the form action and method, while the information entered is stored
+under "artist" as determined by the input box name. Hence, some query for "Papas da Lingua" would be formatted as /search?artist=Papas+da+Lingua
+
+After knowing that the Spotify APY responds to queries in form q= ... and not artist= ... we could
+avoid parsing later by changing the name of the input box to "q" instead of "artist". This way the query
+sent to search would be closer to the query accepted by Sotify, but this is just a detail that I 
+noticed and decided to comment on. As result, the previous example would become /search?q=Papas+da+Lingua
+
+Vagner
+
+=-=-=-=-=-=-=-=-=-=-=-=-
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width, autoRotate:disabled, initial-scale=1.0 ">
+		<title>Album Art Finder</title>
+		<style>
+			body, form{
+				margin: 0 auto;
+				max-width:800px;
+				height:100%;
+				overflow-x:hidden;
+			}
+			html
+			{
+				height:100%;
+			}
+			fieldset{
+				display: flex;
+				flex-direction:row;
+
+			}
+			input#artist{
+				flex-grow:80;
+				margin: 10px 5px;	
+			}
+			
+		</style>
+	</head>
+	<body style='background:url(https://cdn.britannica.com/58/142358-050-073045C5/Sheet-music-notation.jpg); background-repeat:repeat-y; background-size:cover;'>
+		<form action="search" method="get">
+			<img style="margin-top:50px; padding-bottom:10px;" src="../images/banner.jpg" alt="Album Artist Search" />
+			<fieldset style='background:white;'>
+				<label for="artist" style='margin-top:10px;'><b>Artist Name:</b></label>
+				<input id="artist" name="artist" type="text"/>
+				<input type="submit" value="Search"/>
+			</fieldset>
+		</form>
+	</body>
+</html>
