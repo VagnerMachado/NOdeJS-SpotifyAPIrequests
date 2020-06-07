@@ -34,6 +34,14 @@ The searches are performed through the Spotify API.
 * Perform a GET request to download all images in those paths and save them to album-art folder
 * Send user a html file with <img> sources which get processed by the server and pictures are finally piped into user page 
 
-**Note**  Get a client id and client secret from Spotify and place them into auth/credentials in order to use thi sservice and run your own searches. See line 300-305 to set the cache expiration length.   
-
+**Note**  
+- Get a client id and client secret from Spotify and place them into auth/credentials in order to use this service and run your own searches. See line 300-305 to set the cache expiration length.    
+- This repo contains also a few traffic graphs illustrating different situations encountered when using the server.
+- Make sure to read 'Performance Improvements' 
+- For testing, use the following cached search terms:
+	- honeyhoney
+	- papas da lingua
+	- natiruts
+	- taylor swift  
+	
 *Vagner*
